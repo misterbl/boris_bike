@@ -2,10 +2,11 @@ require 'docking_station.rb'
 
 describe DockingStation do
 
-it "respond to the method release bike" do
-  station = DockingStation.new
-  expect(station.release_bike).to eq nil
-  #expect(station).to respond_to release_bike
-end
+	it { is_expected.to respond_to :release_bike }
+	
+# Long way
+# it "respond to the method release bike" do
+#   expect(subject).to respond_to :release_bike
+# end
 
 end

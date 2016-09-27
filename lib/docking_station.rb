@@ -1,8 +1,8 @@
-require 'bike.rb'
+# require 'bike.rb'
 class DockingStation
 
 	def release_bike
-		bike = Bike.new
+		 bike = Bike.new
 		#bike.working? == true
 	end
 

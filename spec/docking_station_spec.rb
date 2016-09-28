@@ -25,6 +25,10 @@ it "returns docked bikes" do
 	expect(subject.bike).to eq bike
 end
 
+it "doesn't release bikes when there aren't any available" do
+	expect{docking_station.release_bike}.to raise_error ("NO BIKES!")
+end
+
 #it "returns hired bikes to the docking station" do
 #	expect{bike.length}.to change{DockingStation.co}(from 0).to(1)
 #end

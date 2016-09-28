@@ -17,8 +17,11 @@ describe DockingStation do
     expect(subject).to respond_to(:dock).with(1).argument
     subject.dock(bike)
     expect(subject.instance_variable_defined?(:@bike)).to eq true
-    expect(subject.bike).to eq bike    
+    expect(subject.bike).to eq bike
+  end
+
+  it 'cannot release when no bike' do
+    expect {subject.release_bike}.to raise_error
   end
 
 end
-

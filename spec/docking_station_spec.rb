@@ -17,4 +17,16 @@ it "gets a bike and checks if it works" do
   expect(bike).to be_working
 end
 
+it {is_expected.to respond_to(:dock).with(1).arguments}
+
+it "returns docked bikes" do
+	bike = Bike.new
+	subject.dock(bike)
+	expect(subject.bike).to eq bike
+end
+
+#it "returns hired bikes to the docking station" do
+#	expect{bike.length}.to change{DockingStation.co}(from 0).to(1)
+#end
+
 end

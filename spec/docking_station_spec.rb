@@ -13,10 +13,12 @@ describe DockingStation do
 	end
 
   it 'docks a bike' do
-    # expect(subject).to respond_to :docked?
-    expect(subject.docked?).to eq false
-    subject.dock
-    expect(subject.docked?).to eq true
+    bike = subject.release_bike
+    expect(subject).to respond_to(:dock).with(1).argument
+    subject.dock(bike)
+    expect(subject.instance_variable_defined?(:@bike)).to eq true
+    expect(subject.bike).to eq bike    
   end
 
 end
+

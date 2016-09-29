@@ -5,9 +5,7 @@ def initialize
 	@bikes = []
 end
 	def release_bike
-		if @bikes.empty?
-			raise "No bike available."
-		else
+		raise "No bike available."	if empty?
 			 @bikes.pop
 		end
 
@@ -15,8 +13,19 @@ end
 	end
 
 	def dock(bike)
-			raise 'Docking station full' if @bikes.count >= 20
+			raise 'Docking station full' if full?
 				@bikes << bike
-
 	end
+
+	def full?
+		@bikes.count >= 20
+	end
+
+	def empty?
+		@bikes.empty?
+	end
+
+	private :full?, :empty?
+
+
 end

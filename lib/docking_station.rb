@@ -2,7 +2,12 @@
 class DockingStation
 attr_reader :bike
 	def release_bike
-		 Bike.new
+		if @bike == nil
+			raise "No bike available."
+		else
+			 Bike.new
+		end
+
 		#bike.working? == true
 	end
 

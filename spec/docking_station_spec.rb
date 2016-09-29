@@ -13,8 +13,10 @@ describe DockingStation do
 
 
 it "gets a bike and checks if it works" do
-  bike = docking_station.release_bike
-  expect(bike).to be_working
+	if @bike != nil
+  	bike = docking_station.release_bike
+  	expect(bike).to be_working
+	end
 end
 
 it {is_expected.to respond_to(:dock).with(1).arguments}
@@ -26,7 +28,9 @@ it "returns docked bikes" do
 end
 
 it "doesn't release bikes when there aren't any available" do
-	expect{docking_station.release_bike}.to raise_error ("NO BIKES!")
+	if @bike == nil
+		expect{docking_station.release_bike}.to raise_error ("No bike available.")
+	end
 end
 
 #it "returns hired bikes to the docking station" do

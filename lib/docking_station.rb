@@ -3,9 +3,11 @@ class DockingStation
 
   attr_accessor :bikes
 
+  DEFAULT_CAPACITY = 20
+
   def initialize
     @bikes = []
-    20.times { @bikes.push(Bike.new) }
+    DEFAULT_CAPACITY.times { @bikes.push(Bike.new) }
   end
 
   def release_bike
@@ -20,7 +22,7 @@ class DockingStation
 
   private
   def full?
-    @bikes.count >= 20
+    @bikes.count >= DEFAULT_CAPACITY
   end
 
   def empty?

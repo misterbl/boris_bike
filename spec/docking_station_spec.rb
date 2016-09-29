@@ -4,6 +4,10 @@ describe DockingStation do
 
   it {is_expected.to respond_to :release_bike}
 
+  it 'starts with default capacity of bikes docked' do
+    expect(subject.bikes.length).to eq(DockingStation::DEFAULT_CAPACITY)
+  end
+
   describe '#release_bike' do
     it 'releases a bike' do
       bike = subject.bikes.last
@@ -27,7 +31,7 @@ describe DockingStation do
   end
 
   describe '#release_bike' do
-    it 'raises an error when there are no bikes available', focus: :true do
+    it 'raises an error when there are no bikes available' do
       subject.bikes = []
       expect {subject.release_bike}.to raise_error 'No bikes available'
     end
@@ -38,9 +42,4 @@ describe DockingStation do
       expect {subject.dock(Bike.new)}.to raise_error 'Docking station full'
     end
   end
-
-  it 'starts with 20 bikes docked' do
-    expect(subject.bikes.length).to eq(20)
-  end
-
 end

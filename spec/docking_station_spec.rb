@@ -44,16 +44,26 @@ describe DockingStation do
   end
 
   describe '#initialize' do
-    it 'has a default capacity of 20 when no parameter is passed', focus: :true do
+    it 'has a default capacity of 20 when no parameter is passed' do
     station = DockingStation.new()
     expect(station.bikes.count).to eq(DockingStation::DEFAULT_CAPACITY)
     end
   end
 
   describe '#initialize' do
-    it 'has a variable capacity', focus: :true do
-    station = DockingStation.new(17)
-    expect(station.bikes.count).to eq(17)
+    it 'has a variable capacity' do
+      station = DockingStation.new(17)
+      expect(station.bikes.count).to eq(17)
     end
   end
+
+
+  describe '#report' do
+    it 'allows a bike to be reported as broken' do
+      bike = Bike.new
+      subject.report(bike)
+      expect(bike.working).to eq(false) 
+    end
+  end
+
 end

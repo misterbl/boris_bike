@@ -9,7 +9,8 @@ class DockingStation
   end
 
   def dock(bike)
-  	@bike = bike 
+  	raise 'Docking station full' unless @bike == nil
+    @bike = bike
   end
 
 end

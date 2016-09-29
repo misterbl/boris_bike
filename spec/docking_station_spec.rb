@@ -16,7 +16,6 @@ describe DockingStation do
     bike = Bike.new
     expect(subject).to respond_to(:dock).with(1).argument
     subject.dock(bike)
-    expect(subject.instance_variable_defined?(:@bike)).to eq true
     expect(subject.bike).to eq bike
   end
 
@@ -26,6 +25,11 @@ describe DockingStation do
     end
   end
 
+  describe '#dock' do
+    it 'rasies an error when there is no space in a docking station' do
+      subject.dock(Bike.new)
+      expect {subject.dock(Bike.new)}.to raise_error 'Docking station full'
+    end
+  end
+
 end
-
-

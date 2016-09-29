@@ -2,6 +2,9 @@ require 'docking_station.rb'
 require 'bike.rb'
 
 describe DockingStation do
+	before(:all) do
+	@bikes = []
+end
 	subject(:docking_station) {described_class.new}
 
 	it { is_expected.to respond_to :release_bike }
@@ -13,7 +16,7 @@ describe DockingStation do
 
 
 it "gets a bike and checks if it works" do
-	if @bike != nil
+	if @bikes.count != 0
   	bike = docking_station.release_bike
   	expect(bike).to be_working
 	end
@@ -21,20 +24,20 @@ end
 
 it {is_expected.to respond_to(:dock).with(1).arguments}
 
-it "can't accept more bike than its capacity" do
-	bike = Bike.new
-	subject.dock(bike)
-		expect{docking_station.dock(bike)}.to raise_error ("Can't accept more bikes.")
+
+it 'raises an error when full' do
+      20.times { subject.dock(Bike.new) }
+      expect { subject.dock(Bike.new) }.to raise_error 'Docking station full'
 end
 
 it "returns docked bikes" do
 	bike = Bike.new
 	subject.dock(bike)
-	expect(subject.bike).to eq bike
+	expect(@bikes).to eq @bikes << bike
 end
 
 it "doesn't release bikes when there aren't any available" do
-	if @bike == nil
+	if @bikes.empty?
 		expect{docking_station.release_bike}.to raise_error ("No bike available.")
 	end
 end

@@ -6,7 +6,8 @@ describe DockingStation do
 
   describe '#release_bike' do
     it 'releases a bike' do
-      expect(subject.release_bike).to eq subject.bikes.last
+      bike = subject.bikes.last
+      expect(subject.release_bike).to eq bike
 	  end
   end
 

@@ -21,6 +21,12 @@ end
 
 it {is_expected.to respond_to(:dock).with(1).arguments}
 
+it "can't accept more bike than its capacity" do
+	bike = Bike.new
+	subject.dock(bike)
+		expect{docking_station.dock(bike)}.to raise_error ("Can't accept more bikes.")
+end
+
 it "returns docked bikes" do
 	bike = Bike.new
 	subject.dock(bike)

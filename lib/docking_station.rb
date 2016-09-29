@@ -12,6 +12,10 @@ attr_reader :bike
 	end
 
 	def dock(bike)
+		if @bike 
+			raise "Can't accept more bikes."
+		else
 		@bike = bike
+		end
 	end
 end

@@ -21,10 +21,10 @@ describe DockingStation do
     end
   end
 
-  describe '#dock' do
+  describe '#dock' do   #Double
     it 'docks a bike' do
       subject.bikes.pop
-      bike = Bike.new
+      bike = double(:bike)
       subject.dock(bike)
       expect(subject.bikes).to include(bike)
     end
@@ -46,9 +46,9 @@ describe DockingStation do
     end
   end
 
-  describe '#dock' do
+  describe '#dock' do   #Double
     it 'raises an error when there is no space in a docking station' do
-      expect {subject.dock(Bike.new)}.to raise_error 'Docking station full'
+      expect {subject.dock(double(:bike))}.to raise_error 'Docking station full'
     end
   end
 
@@ -79,9 +79,9 @@ describe DockingStation do
 
   describe '#report' do
     it 'allows a bike to be reported as broken' do
-      bike = Bike.new
+      bike = double(:bike)
       subject.report(bike)
-      expect(bike.working).to eq(false) 
+      expect(bike.working).to eq(false)
     end
   end
 

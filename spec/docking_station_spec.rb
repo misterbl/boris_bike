@@ -37,9 +37,8 @@ end
 	end
 
 	it "doesn't release bikes when there aren't any available" do
-		if @bikes.empty?
+		@bikes.empty?
 			expect{docking_station.release_bike}.to raise_error ("No bikes available.")
-		end
 	end
 
 	it "allows the user to set the capacity when a new instance of DS is created" do

@@ -9,9 +9,13 @@ describe DockingStation do
   end
 
   describe '#release_bike' do
-    it 'releases a bike' do
-      bike = subject.bikes.last
+    let(:bike) {double :bike, working: true}
+    it 'releases a working bike' do
+      allow(bike).to receive(:working?).and_return(true)
+      subject.release_bike
+      subject.dock bike
       expect(subject.release_bike).to eq bike
+      expect(bike).to be_working
 	  end
   end
 
@@ -21,10 +25,11 @@ describe DockingStation do
     end
   end
 
-  describe '#dock' do   #Double
+  describe '#dock' do
+    let(:bike) {double :bike}
     it 'docks a bike' do
+      allow(bike).to receive(:working).and_return(true)
       subject.bikes.pop
-      bike = double(:bike)
       subject.dock(bike)
       expect(subject.bikes).to include(bike)
     end
@@ -38,11 +43,11 @@ describe DockingStation do
   end
 
   describe '#release_bike' do
-    it 'does not release a broken bike', focus: :true do
-      bike = subject.release_bike
-      broken_bike = subject.report(bike)
-      subject.dock(broken_bike)
-      expect(subject.release_bike).to_not eq(broken_bike)
+      let(:bike) {double :bike, working: false}
+    it 'does not release a broken bike' do
+      subject.release_bike
+      subject.dock bike
+      expect(subject.release_bike).to_not eq(bike)
     end
   end
 
@@ -53,11 +58,11 @@ describe DockingStation do
   end
 
   describe '#dock' do
-    it 'accepts broken bikes', focus: :true do
-      bike = subject.release_bike
-      broken_bike = subject.report(bike)
-      subject.dock(broken_bike)
-      expect(subject.broken_bikes).to include(broken_bike)
+    let(:bike) {double :bike, working: false}
+    it 'accepts broken bikes' do
+      subject.release_bike
+      subject.dock(bike)
+      expect(subject.broken_bikes).to include(bike)
     end
   end
 
@@ -73,15 +78,6 @@ describe DockingStation do
     it 'has a variable capacity' do
       station = DockingStation.new(17)
       expect(station.bikes.count).to eq(17)
-    end
-  end
-
-
-  describe '#report' do
-    it 'allows a bike to be reported as broken' do
-      bike = double(:bike)
-      subject.report(bike)
-      expect(bike.working).to eq(false)
     end
   end
 

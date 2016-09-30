@@ -3,11 +3,11 @@ require 'bike'
 describe Bike do
   it {is_expected.to respond_to :working}
 
-  it 'docks in station' do
-    # expect(subject).to respond_to :docked?
-    # expect(subject.docked?).to eq false
-    # subject.dock
-    # expect(subject.docked?).to eq true
+  describe '#report' do
+    it 'allows a bike to be reported as broken' do
+      subject.report
+      expect(subject.working).to eq(false)
+    end
   end
 
 end

@@ -27,11 +27,6 @@ class DockingStation
     end
   end
 
-  def report(bike)
-    bike.working = false
-    bike
-  end
-
   private
 
   def full?

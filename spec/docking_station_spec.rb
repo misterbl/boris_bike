@@ -43,6 +43,14 @@ end
 	end
 
 	it "allows the user to set the capacity when a new instance of DS is created" do
-		expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+	expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+	end
+
+	it "allows the user to report a bike as broken when they return it" do
+		bike = Bike.new
+		subject.report_bike(bike)
+		expect(subject.broken_bikes).to eq ([bike])
+
+		#expect(subject.report_bike(bike)).to eq :broken_bikes << bike
 	end
 end
